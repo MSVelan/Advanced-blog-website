@@ -10,12 +10,13 @@ from forms import CreatePostForm, RegisterForm, LoginForm, CommentForm
 from flask_gravatar import Gravatar
 from flask_mail import Mail, Message
 from functools import wraps
-import os
+import os, random
 from dotenv import load_dotenv
 
 # Load environment variables from the .env file
 load_dotenv()
 
+static_ips = ['100.20.92.101', '44.225.181.72', '44.227.217.144']
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRETKEY")
@@ -25,6 +26,7 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_DEFAULT_SENDER']=os.getenv("MYEMAIL")
 app.config['MAIL_USERNAME'] = os.getenv("SECONDARYEMAIL")
 app.config['MAIL_PASSWORD'] = os.getenv("MAILPASSWORD")
+app.config['MAIL_USE_CUSTOM_SERVER'] = True
 
 mail = Mail(app)
 
@@ -308,6 +310,9 @@ def sendMail():
         }
         msg_body = "An user is trying to reach out.. check the below data for info\n"
         message = Message(subject=msg_title,recipients=[adminEmail],sender=sender,body=msg_body)
+
+        selected_ip = random.choice(static_ips)
+        message.extra_headers = {'X-Originating-IP': selected_ip}
 
         message.html = render_template("email.html",data=data)
         try:
