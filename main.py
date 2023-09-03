@@ -18,13 +18,13 @@ load_dotenv()
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.environ.get("SECRETKEY")
+app.config['SECRET_KEY'] = os.getenv("SECRETKEY")
 app.config['MAIL_SERVER'] = "smtp.googlemail.com"
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_DEFAULT_SENDER']=os.environ.get("MYEMAIL")
-app.config['MAIL_USERNAME'] = os.environ.get("SECONDARYEMAIL")
-app.config['MAIL_PASSWORD'] = os.environ.get("MAILPASSWORD")
+app.config['MAIL_DEFAULT_SENDER']=os.getenv("MYEMAIL")
+app.config['MAIL_USERNAME'] = os.getenv("SECONDARYEMAIL")
+app.config['MAIL_PASSWORD'] = os.getenv("MAILPASSWORD")
 
 mail = Mail(app)
 
