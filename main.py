@@ -193,6 +193,7 @@ def show_post(post_id):
 @app.route("/about")
 def about():
     return render_template("about.html")
+    print("hi")
 
 
 @app.route("/contact", methods=["GET","POST"])
