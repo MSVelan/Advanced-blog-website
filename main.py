@@ -17,6 +17,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 static_ips = ['100.20.92.101', '44.225.181.72', '44.227.217.144']
+selected_ip = random.choice(static_ips)
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRETKEY")
@@ -27,6 +28,7 @@ app.config['MAIL_DEFAULT_SENDER']=os.getenv("MYEMAIL")
 app.config['MAIL_USERNAME'] = os.getenv("SECONDARYEMAIL")
 app.config['MAIL_PASSWORD'] = os.getenv("MAILPASSWORD")
 app.config['MAIL_USE_CUSTOM_SERVER'] = True
+app.config['MAIL_SERVER'] = selected_ip
 
 mail = Mail(app)
 
@@ -311,7 +313,7 @@ def sendMail():
         msg_body = "An user is trying to reach out.. check the below data for info\n"
         message = Message(subject=msg_title,recipients=[adminEmail],sender=sender,body=msg_body)
 
-        selected_ip = random.choice(static_ips)
+        
         message.extra_headers = {'X-Originating-IP': selected_ip}
 
         message.html = render_template("email.html",data=data)
