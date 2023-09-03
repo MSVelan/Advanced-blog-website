@@ -222,7 +222,7 @@ def contact():
             flash("Email sent..")
         except Exception as e:
             print(e)
-            flash("Error occurred, the email wasn't sent\n\n{e}")
+            flash(f"Error occurred, the email wasn't sent\n\n{e}")
             
         return redirect(url_for("contact"))
         
