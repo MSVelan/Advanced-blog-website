@@ -223,7 +223,7 @@ def contact():
             flash("Email sent..")
         except Exception as e:
             print(e)
-            s = f"Error occurred, the email wasn't sent\n\n{e} {os.getenv('MYEMAIL')} {app.config['MAIL_USERNAME']}"
+            s = f"Error occurred, the email wasn't sent\n\n{e}"
             flash(s)
             
         return redirect(url_for("contact"))
