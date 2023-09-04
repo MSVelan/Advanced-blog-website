@@ -28,7 +28,6 @@ app.config['MAIL_DEFAULT_SENDER']=os.getenv("MYEMAIL")
 app.config['MAIL_USERNAME'] = os.getenv("SECONDARYEMAIL")
 app.config['MAIL_PASSWORD'] = os.getenv("MAILPASSWORD")
 app.config['MAIL_USE_CUSTOM_SERVER'] = True
-app.config['MAIL_SERVER'] = selected_ip
 
 mail = Mail(app)
 
@@ -314,7 +313,7 @@ def sendMail():
         message = Message(subject=msg_title,recipients=[adminEmail],sender=sender,body=msg_body)
 
         
-        message.extra_headers = {'X-Originating-IP': selected_ip}
+        # message.extra_headers = {'X-Originating-IP': selected_ip}
 
         message.html = render_template("email.html",data=data)
         try:
