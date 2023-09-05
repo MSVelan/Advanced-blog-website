@@ -22,8 +22,9 @@ selected_ip = random.choice(static_ips)
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv("SECRETKEY")
 app.config['MAIL_SERVER'] = "smtp.googlemail.com"
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_DEFAULT_SENDER']=os.getenv("MYEMAIL")
 app.config['MAIL_USERNAME'] = os.getenv("SECONDARYEMAIL")
 app.config['MAIL_PASSWORD'] = os.getenv("MAILPASSWORD")
@@ -300,7 +301,6 @@ def sendMail():
         print(msg)
 
         msg_title = "User from Blog Post project contacting..."
-        sender = email
         adminEmail = "muthiahsivavelan2026@gmail.com"
         data = {
             "app_name": "MSV Blog",
@@ -310,7 +310,7 @@ def sendMail():
             "user_message": msg
         }
         msg_body = "An user is trying to reach out.. check the below data for info\n"
-        message = Message(subject=msg_title,recipients=[adminEmail],sender=sender,body=msg_body)
+        message = Message(subject=msg_title,sender=email,recipients=[adminEmail],body=msg_body)
 
         
         # message.extra_headers = {'X-Originating-IP': selected_ip}
