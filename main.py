@@ -310,7 +310,7 @@ def sendMail():
             "user_message": msg
         }
         msg_body = "An user is trying to reach out.. check the below data for info\n"
-        message = Message(subject=msg_title,sender=email,recipients=[adminEmail],body=msg_body)
+        message = Message(subject=msg_title,sender=adminEmail,recipients=[adminEmail],body=msg_body)
 
         
         # message.extra_headers = {'X-Originating-IP': selected_ip}
