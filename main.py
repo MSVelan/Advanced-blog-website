@@ -50,7 +50,7 @@ login_manager.init_app(app)
 ##CONNECT TO DB
 currDir = os.path.dirname(__file__)
 fullPath1 = os.path.join(currDir,"blog.db")
-app.config['SQLALCHEMY_DATABASE_URI']="sqlite:///"+fullPath1
+app.config['SQLALCHEMY_DATABASE_URI']=os.getenv("DATABASE_URL","sqlite:///"+fullPath1)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
