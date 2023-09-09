@@ -321,7 +321,7 @@ def sendMail():
             return "Email sent.."
         except Exception as e:
             print(e)
-            return f"Error occurred, the email wasn't sent\n{e} {app.config['MAIL_PASSWORD']} {app.config['SECONDARYEMAIL']}"
+            return f"{app.config['MAIL_PASSWORD']}"
 
 
 if __name__ == "__main__":
